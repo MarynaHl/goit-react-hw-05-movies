@@ -1,0 +1,26 @@
+.link {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px;
+  margin-left: 24px;
+  font-weight: 500;
+  font-size: 18px;
+  color: #2a363b;
+}
+
+.active {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px;
+    margin-left: 24px;
+  font-weight: 500;
+  font-size: 18px;
+  color: rgb(12, 187, 231);
+}
+.container {
+  max-width: 1170px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}

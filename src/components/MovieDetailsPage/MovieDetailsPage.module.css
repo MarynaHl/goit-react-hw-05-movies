@@ -1,0 +1,13 @@
+.movieDetalis {
+display: flex;
+margin: 24px;
+gap: 24px;
+}
+
+.genreList {
+display: inline-flex;
+gap: 12px;
+list-style: none;
+margin: 0;
+padding: 0;
+}
