@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Route, Routes, NavLink } from 'react-router-dom';
+import { Route, Routes, NavLink, Navigate } from 'react-router-dom';
 import s from './App.module.css';
 
 const HomePage = lazy(() => import('../HomePage/HomePage'));
@@ -30,20 +30,14 @@ export const App = () => {
       </nav>
       <Suspense fallback="loading">
         <Routes>
-                 <Route path="/goit-react-hw-05-movies/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route
-            path="/goit-react-hw-05-movies/movies"
-            element={<MoviesPage />}
-          />
-          <Route
-            path="/goit-react-hw-05-movies/movies/:movieId"
-            element={<MovieDetailsPage />}
-          >
+          <Route path="/" element={<HomePage />} />
+          <Route path="movies" element={<MoviesPage />} />
+          <Route path="movies/:movieId" element={<MovieDetailsPage />}>
             <Route path="cast" element={<Cast />} />
-            <Route path="reviews" element={<Review />} />
+            <Route path="reviews" element={<Reviews />} />
           </Route>
-        </Route>
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
       </Suspense>
     </div>
   );

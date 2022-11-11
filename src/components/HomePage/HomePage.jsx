@@ -1,22 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import EditorList from '../EditorList/EditorList';
 import api from '../../services/api';
+import Loader from 'components/Loader/Loader';
 
-export default function HomePage() {
-  const [movies, setMovies] = useState([]);
+const HomePage = () => {
+  const [films, setFilms] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    api.getTrendingMovies().then(data => {
-      data.results.map(({ id, title }) =>
-        setMovies(m => [...m, { id, title }])
-      );
-    });
+    const FetchTrendingFilms = async () => {
+      setLoading(true);
+      try {
+        const trendingFilms = await api.fetchTrending();
+        setFilms(trendingFilms);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    FetchTrendingFilms();
   }, []);
 
   return (
     <main>
       <h1>Trending today</h1>
-      {movies.length !== 0 && <MoviesList movies={movies} />}
+      {films && <EditorList films={films} />}
+      {loading && <Loader />}
     </main>
   );
-}
+};
+
+export default HomePage;

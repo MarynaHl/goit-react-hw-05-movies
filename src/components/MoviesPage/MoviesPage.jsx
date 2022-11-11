@@ -8,9 +8,12 @@ const MoviesPage = () => {
   const [searchFilms, setSearchFilms] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams({});
+  const queryMovie = searchParams.get('query');
 
   const handleSubmit = event => {
-
+    event.preventDefault();
+    setSearchParams({ query: event.target.elements.query.value.toLowerCase() });
+  };
 
   useEffect(() => {
     if (queryMovie) {

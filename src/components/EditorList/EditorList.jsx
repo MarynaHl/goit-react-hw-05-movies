@@ -5,19 +5,18 @@ const EditorList = ({ films }) => {
   const location = useLocation();
 
   return (
-    <li>
-      <Link
-        to={`/goit-react-hw-05-movies/movies/${id}`}
-        state={{
-          location: useLocation().pathname,
-          search: searchParams.get('query'),
-        }}
-      >
-        {title}
-      </Link>
-    </li>
+    <ul>
+      {films &&
+        films.map(film => (
+          <li key={film.id}>
+            <Link to={`/movies/${film.id}`} state={{ from: location }}>
+              {film.title}
+            </Link>
+          </li>
+        ))}
+    </ul>
   );
-}
+};
 
 EditorList.propTypes = {
   films: PropTypes.arrayOf(
