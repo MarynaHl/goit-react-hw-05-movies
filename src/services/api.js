@@ -1,5 +1,4 @@
 import axios from 'axios';
-import PropTypes from 'prop-types';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 
@@ -10,12 +9,12 @@ const fetchTrending = async () => {
   return response.data.results;
 };
 
-function fetchMoviesWithQuery(query) {
-  const response = axios.get(
-    `/search/movie?api_key=cdb4ad63923aa36135ea3e63ffafaaae&query=${query}`
+const fetchSearchByKeyword = async keyword => {
+  const response = await axios.get(
+    `search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${keyword}`
   );
-  return response;
-}
+  return response.data.results;
+};
 
 const fetchMovieDetalis = async movieId => {
   const response = await axios.get(
@@ -40,14 +39,10 @@ const fetchReviews = async movieId => {
 
 const api = {
   fetchTrending,
+  fetchSearchByKeyword,
   fetchMovieDetalis,
-  fetchMoviesWithQuery,
   fetchActors,
   fetchReviews,
 };
 
 export default api;
-
-fetchMoviesWithQuery.propTypes = {
-  query: PropTypes.string.isRequired,
-};
